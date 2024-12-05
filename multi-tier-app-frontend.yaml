@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Multi-Tier Application with Frontend using S3 and Route 53.
+
+Parameters:
+  ACMCertificateArn:
+    Type: String
+    Description: ARN of the ACM Certificate for HTTPS (ACM)
+
+Resources:
+  # S3 Bucket for Frontend Hosting
+  FrontendS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: multi-tier-app-frontend
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  # S3 Bucket Policy for Public Access
+  FrontendS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FrontendS3Bucket
+      PolicyDocument:
+        Statement:
+          - Sid: AllowPublicRead
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${FrontendS3Bucket.Arn}/*"
+
+  # Route 53 DNS for Frontend
+  FrontendDNS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: devil-may-cry.in.  # Replace with your actual hosted zone
+      Name: www.devil-may-cry.in.
+      Type: CNAME
+      TTL: 300
+      ResourceRecords:
+        - !GetAtt FrontendS3Bucket.WebsiteURL
+
+Outputs:
+  FrontendS3BucketURL:
+    Description: "Frontend S3 Bucket Website URL"
+    Value: !GetAtt FrontendS3Bucket.WebsiteURL

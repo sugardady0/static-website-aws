@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background: #f4f4f9;
+}
+
+/* Header Section */
+.header {
+    background: linear-gradient(120deg, #0073e6, #00bcd4);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    animation: fadeIn 1.5s ease;
+}
+
+.header p {
+    font-size: 1.2rem;
+    animation: fadeIn 2s ease;
+}
+
+.contact-info {
+    margin-top: 1rem;
+    animation: fadeIn 2.5s ease;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Section */
+.section {
+    padding: 2rem;
+    background: white;
+    margin: 1rem auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: slideIn 1s ease;
+}
+
+.section h2 {
+    text-align: center;
+    color: #0073e6;
+    margin-bottom: 1rem;
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+}
+
+.skills-list li {
+    margin: 0.5rem 0;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+    color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
